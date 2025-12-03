@@ -1,15 +1,15 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from '@/components/ui/skeleton'
 
 export const ProductCardSkeleton = () => (
-  <div className="w-full border rounded-lg">
-    <Skeleton className="w-full h-[400px] mb-5" />
-    <div className="space-y-2 mb-8 px-5">
-      <Skeleton className="w-[120px] h-6" />
-      <Skeleton className="w-[180px] h-4" />
-      <Skeleton className="w-[160px] h-4" />
-      <Skeleton className="w-[80px] h-4" />
+    <div className="w-full rounded-lg border">
+        <Skeleton className="mb-5 h-[400px] w-full" />
+        <div className="mb-8 space-y-2 px-5">
+            <Skeleton className="h-6 w-[120px]" />
+            <Skeleton className="h-4 w-[180px]" />
+            <Skeleton className="h-4 w-[160px]" />
+            <Skeleton className="h-4 w-[80px]" />
+        </div>
     </div>
-  </div>
-);
+)
 
-export default ProductCardSkeleton;
+export default ProductCardSkeleton

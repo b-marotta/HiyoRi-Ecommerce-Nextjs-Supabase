@@ -1,26 +1,27 @@
-import { Suspense } from "react";
-import CartNav from "../../features/carts/components/CartNav";
-import Branding from "./Branding";
-import MobileSearchInput from "./MobileSearchInput";
-import { SideMenu } from "./SideMenu";
-import CartLink from "../../features/carts/components/CartLink";
+import { Suspense } from 'react'
 
-type Props = { adminLayout: boolean };
+import CartLink from '../../features/carts/components/CartLink'
+import CartNav from '../../features/carts/components/CartNav'
+import Branding from './Branding'
+import MobileSearchInput from './MobileSearchInput'
+import { SideMenu } from './SideMenu'
+
+type Props = { adminLayout: boolean }
 
 function MobileNavbar({ adminLayout }: Props) {
-  return (
-    <div className="md:hidden flex gap-x-8 justify-between items-center h-[64px]">
-      <div className="flex gap-x-3 items-center">
-        <SideMenu />
-        <MobileSearchInput />
-      </div>
+    return (
+        <div className="flex h-[64px] items-center justify-between gap-x-8 md:hidden">
+            <div className="flex items-center gap-x-3">
+                <SideMenu />
+                <MobileSearchInput />
+            </div>
 
-      <Branding />
-      <Suspense fallback={<CartLink productCount={0} />}>
-        {!adminLayout && <CartNav />}
-      </Suspense>
-    </div>
-  );
+            <Branding />
+            <Suspense fallback={<CartLink productCount={0} />}>
+                {!adminLayout && <CartNav />}
+            </Suspense>
+        </div>
+    )
 }
 
-export default MobileNavbar;
+export default MobileNavbar

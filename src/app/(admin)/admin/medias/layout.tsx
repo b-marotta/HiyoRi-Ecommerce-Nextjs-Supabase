@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react'
 
 type Props = {
-  children: React.ReactNode;
-  mediaModal: React.ReactNode;
-};
-
-function layout({ mediaModal, children }: Props) {
-  return (
-    <>
-      {children}
-      {mediaModal}
-    </>
-  );
+    children: React.ReactNode
+    mediaModal: React.ReactNode
 }
 
-export default layout;
+function layout({ mediaModal, children }: Props) {
+    return (
+        <>
+            {children}
+            {mediaModal}
+        </>
+    )
+}
+
+export default layout

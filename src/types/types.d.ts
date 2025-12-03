@@ -2,9 +2,9 @@
 // Credit: HeyImMapleLeaf
 
 declare global {
-  namespace JSX {
-    type ElementType =
-      | keyof JSX.IntrinsicElements
-      | ((props: any) => Promise<ReactNode> | React.ReactNode);
-  }
+    namespace JSX {
+        type ElementType =
+            | keyof JSX.IntrinsicElements
+            | ((props: any) => Promise<ReactNode> | React.ReactNode)
+    }
 }

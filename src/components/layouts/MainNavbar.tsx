@@ -1,61 +1,62 @@
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { Suspense } from "react";
-import { CartLink, CartNav } from "../../features/carts";
-import { UserNav } from "@/features/auth";
-import { Icons } from "./icons";
-import Branding from "./Branding";
-import MobileNavbar from "./MobileNavbar";
-import SearchInput from "./SearchInput";
-import { SideMenu } from "./SideMenu";
+import { Suspense } from 'react'
+
+import Link from 'next/link'
+
+import { UserNav } from '@/features/auth'
+import { cn } from '@/lib/utils'
+
+import { CartLink, CartNav } from '../../features/carts'
+import Branding from './Branding'
+import MobileNavbar from './MobileNavbar'
+import SearchInput from './SearchInput'
+import { SideMenu } from './SideMenu'
+import { Icons } from './icons'
 
 interface MainNavbarProps {
-  adminLayout?: boolean;
+    adminLayout?: boolean
 }
 
 async function MainNavbar({ adminLayout = false }: MainNavbarProps) {
-  return (
-    <nav className="bg-background/95 fixed z-50 w-full">
-      <div
-        className={cn(
-          adminLayout ? "mx-auto px-[3rem] max-w-[2500px] py-3" : "container",
-        )}
-      >
-        <div className="hidden md:flex gap-x-8 justify-between items-center">
-          {/* Menu & branding */}
-          <div className="flex gap-x-3 items-center">
-            <SideMenu />
-            <Branding />
-          </div>
+    return (
+        <nav className="fixed z-50 w-full bg-background/95">
+            <div
+                className={cn(adminLayout ? 'mx-auto max-w-[2500px] px-[3rem] py-3' : 'container')}
+            >
+                <div className="hidden items-center justify-between gap-x-8 md:flex">
+                    {/* Menu & branding */}
+                    <div className="flex items-center gap-x-3">
+                        <SideMenu />
+                        <Branding />
+                    </div>
 
-          {adminLayout ? (
-            <></>
-          ) : (
-            <Suspense>
-              <SearchInput />
-            </Suspense>
-          )}
+                    {adminLayout ? (
+                        <></>
+                    ) : (
+                        <Suspense>
+                            <SearchInput />
+                        </Suspense>
+                    )}
 
-          {/* Nav Action */}
-          <div className="flex gap-x-5 relative items-center">
-            <Suspense>
-              <UserNav />
-            </Suspense>
+                    {/* Nav Action */}
+                    <div className="relative flex items-center gap-x-5">
+                        <Suspense>
+                            <UserNav />
+                        </Suspense>
 
-            <Link href={"/wish-list"}>
-              <Icons.heart className="w-4 h-4" aria-label="wishlist" />
-            </Link>
+                        <Link href={'/wish-list'}>
+                            <Icons.heart className="h-4 w-4" aria-label="wishlist" />
+                        </Link>
 
-            <Suspense fallback={<CartLink productCount={0} />}>
-              {!adminLayout && <CartNav />}
-            </Suspense>
-          </div>
-        </div>
+                        <Suspense fallback={<CartLink productCount={0} />}>
+                            {!adminLayout && <CartNav />}
+                        </Suspense>
+                    </div>
+                </div>
 
-        <MobileNavbar adminLayout={adminLayout} />
-      </div>
-    </nav>
-  );
+                <MobileNavbar adminLayout={adminLayout} />
+            </div>
+        </nav>
+    )
 }
 
-export default MainNavbar;
+export default MainNavbar
