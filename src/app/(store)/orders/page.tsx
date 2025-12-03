@@ -8,60 +8,56 @@ import { notFound, redirect } from "next/navigation";
 import React from "react";
 
 const OrderPageQuery = gql(/* GraphQL */ `
-  query OrderPageQuery($first: Int!, $userId: UUID) {
-    ordersCollection(
-      first: $first
-      orderBy: [{ created_at: DescNullsLast }]
-      filter: { user_id: { eq: $userId } }
-    ) {
-      __typename
-      edges {
-        ...OrdersListFragment
-      }
-    }
+    query OrderPageQuery($first: Int!, $userId: UUID) {
+        ordersCollection(first: $first, orderBy: [{ created_at: DescNullsLast }], filter: { user_id: { eq: $userId } }) {
+            __typename
+            edges {
+                ...OrdersListFragment
+            }
+        }
 
-    productsCollection(first: 8) {
-      edges {
-        ...BuyAgainCardFragment
-      }
+        productsCollection(first: 8) {
+            edges {
+                ...BuyAgainCardFragment
+            }
+        }
     }
-  }
 `);
 
 async function OrderPage() {
-  const cookieStore = cookies();
-  const supabase = createClient({ cookieStore });
+    const cookieStore = cookies();
+    const supabase = createClient({ cookieStore });
 
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser();
-  if (authError || !user) {
-    redirect("/sign-in");
-  }
+    const {
+        data: { user },
+        error: authError,
+    } = await supabase.auth.getUser();
+    if (authError || !user) {
+        redirect("/sign-in");
+    }
 
-  const { data, error } = await getClient().query(OrderPageQuery, {
-    first: 4,
-    userId: user.id,
-  });
+    const { data, error } = await getClient().query(OrderPageQuery, {
+        first: 4,
+        userId: user.id,
+    });
 
-  if (!data) return notFound();
+    if (!data) return notFound();
 
-  return (
-    <Shell layout="narrow">
-      <h1 className="pb-8 text-3xl font-semibold border-b">Orders</h1>
+    return (
+        <Shell layout="narrow">
+            <h1 className="pb-8 text-3xl font-semibold border-b">Orders</h1>
 
-      <div className="grid grid-cols-12 gap-x-5">
-        <section className="col-span-9">
-          <OrdersList orders={data.ordersCollection.edges} />
-        </section>
+            <div className="grid grid-cols-12 gap-x-5">
+                <section className="col-span-9">
+                    <OrdersList orders={data.ordersCollection.edges} />
+                </section>
 
-        <section className="col-span-3">
-          <BuyAgainCard products={data.productsCollection.edges} />
-        </section>
-      </div>
-    </Shell>
-  );
+                <section className="col-span-3">
+                    <BuyAgainCard products={data.productsCollection.edges} />
+                </section>
+            </div>
+        </Shell>
+    );
 }
 
 export default OrderPage;

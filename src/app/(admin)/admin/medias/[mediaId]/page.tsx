@@ -4,8 +4,8 @@ import React from "react";
 type Props = {};
 
 function MediaPage({}: Props) {
-  redirect("/admin/medias");
-  return <div>MediaPage</div>;
+    redirect("/admin/medias");
+    return <div>MediaPage</div>;
 }
 
 export default MediaPage;

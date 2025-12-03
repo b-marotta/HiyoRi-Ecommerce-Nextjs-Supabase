@@ -6,14 +6,14 @@ import { ReactNode } from "react";
 type Props = { children: ReactNode };
 
 async function StoreLayout({ children }: Props) {
-  return (
-    <>
-      <Navbar />
-      <main className="pt-[50px]">{children}</main>
-      <CartSheet />
-      <MainFooter />
-    </>
-  );
+    return (
+        <>
+            <Navbar />
+            <main className="pt-[50px]">{children}</main>
+            <CartSheet />
+            <MainFooter />
+        </>
+    );
 }
 
 export default StoreLayout;

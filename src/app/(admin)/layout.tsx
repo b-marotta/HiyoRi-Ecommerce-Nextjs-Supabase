@@ -7,18 +7,17 @@ import { ReactNode } from "react";
 type Props = { children: ReactNode };
 
 async function AdminLayout({ children }: Props) {
-  const currentUser = await getCurrentUser();
+    const currentUser = await getCurrentUser();
 
-  if (!isAdmin(currentUser))
-    redirect(`/sign-in?error=Only authenticated users can access`);
+    if (!isAdmin(currentUser)) redirect(`/sign-in?error=Only authenticated users can access`);
 
-  return (
-    <main>
-      <Navbar adminLayout={true} />
-      {children}
-      <MainFooter />
-    </main>
-  );
+    return (
+        <main>
+            <Navbar adminLayout={true} />
+            {children}
+            <MainFooter />
+        </main>
+    );
 }
 
 export default AdminLayout;
