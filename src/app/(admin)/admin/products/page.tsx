@@ -10,42 +10,48 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 type AdminProjectsPageProps = {
-    searchParams: {
-        [key: string]: string | string[] | undefined;
-    };
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
 };
 
 async function ProductsPage({ searchParams }: AdminProjectsPageProps) {
-    const AdminProductsPageQuery = gql(/* GraphQL */ `
-        query AdminProductsPageQuery {
-            productsCollection(orderBy: [{ created_at: DescNullsLast }]) {
-                edges {
-                    node {
-                        id
-                        ...ProductColumnFragment
-                    }
-                }
-            }
+  const AdminProductsPageQuery = gql(/* GraphQL */ `
+    query AdminProductsPageQuery {
+      productsCollection(orderBy: [{ created_at: DescNullsLast }]) {
+        edges {
+          node {
+            id
+            ...ProductColumnFragment
+          }
         }
-    `);
+      }
+    }
+  `);
 
-    const { data } = await getClient().query(AdminProductsPageQuery, {});
+  const { data } = await getClient().query(AdminProductsPageQuery, {});
 
-    if (!data) return notFound();
+  if (!data) return notFound();
 
-    return (
-        <AdminShell heading="Products" description={"Edit products from the dashboard. "}>
-            <section className="flex justify-end items-center pb-5 w-full">
-                <Link href="/admin/products/new" className={cn(buttonVariants())}>
-                    New Product
-                </Link>
-            </section>
+  return (
+    <AdminShell
+      heading="Products"
+      description={"Edit products from the dashboard. "}
+    >
+      <section className="flex justify-end items-center pb-5 w-full">
+        <Link href="/admin/products/new" className={cn(buttonVariants())}>
+          New Product
+        </Link>
+      </section>
 
-            <Suspense fallback={<DataTableSkeleton />}>
-                <ProductsDataTable columns={ProductsColumns} data={data.productsCollection?.edges || []} />
-            </Suspense>
-        </AdminShell>
-    );
+      <Suspense fallback={<DataTableSkeleton />}>
+        <ProductsDataTable
+          columns={ProductsColumns}
+          data={data.productsCollection?.edges || []}
+        />
+      </Suspense>
+    </AdminShell>
+  );
 }
 
 export default ProductsPage;
