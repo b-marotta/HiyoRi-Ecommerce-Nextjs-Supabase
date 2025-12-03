@@ -3,11 +3,11 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 
 type BuyNowButtonProps = {
-  productId: string;
+    productId: string;
 };
 
 function BuyNowButton({ productId }: BuyNowButtonProps) {
-  return <Button type="submit">Buy Now</Button>;
+    return <Button type="submit">Buy Now</Button>;
 }
 
 export default BuyNowButton;
