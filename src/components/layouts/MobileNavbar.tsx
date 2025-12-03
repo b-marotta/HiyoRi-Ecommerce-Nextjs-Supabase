@@ -8,17 +8,19 @@ import CartLink from "../../features/carts/components/CartLink";
 type Props = { adminLayout: boolean };
 
 function MobileNavbar({ adminLayout }: Props) {
-    return (
-        <div className="md:hidden flex gap-x-8 justify-between items-center h-[64px]">
-            <div className="flex gap-x-3 items-center">
-                <SideMenu />
-                <MobileSearchInput />
-            </div>
+  return (
+    <div className="md:hidden flex gap-x-8 justify-between items-center h-[64px]">
+      <div className="flex gap-x-3 items-center">
+        <SideMenu />
+        <MobileSearchInput />
+      </div>
 
-            <Branding />
-            <Suspense fallback={<CartLink productCount={0} />}>{!adminLayout && <CartNav />}</Suspense>
-        </div>
-    );
+      <Branding />
+      <Suspense fallback={<CartLink productCount={0} />}>
+        {!adminLayout && <CartNav />}
+      </Suspense>
+    </div>
+  );
 }
 
 export default MobileNavbar;

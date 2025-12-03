@@ -1,5 +1,12 @@
 "use client";
-import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { SelectCollection } from "@/lib/supabase/schema";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
@@ -9,25 +16,25 @@ import { Separator } from "../../../components/ui/separator";
 type Props = { collections: SelectCollection[] };
 
 function FilterSheet({ collections }: Props) {
-    const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const [isPending, startTransition] = React.useTransition();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [isPending, startTransition] = React.useTransition();
 
-    return (
-        <Sheet>
-            <SheetTrigger asChild>
-                <Button aria-label="Filter products" size="sm" disabled={isPending}>
-                    Filter
-                </Button>
-            </SheetTrigger>
-            <SheetContent className="flex flex-col">
-                <SheetHeader className="px-1">
-                    <SheetTitle>Filters</SheetTitle>
-                </SheetHeader>
-                <Separator />
-                <div className="flex flex-1 flex-col gap-5 overflow-hidden px-1">
-                    {/* <div className="space-y-4">
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button aria-label="Filter products" size="sm" disabled={isPending}>
+          Filter
+        </Button>
+      </SheetTrigger>
+      <SheetContent className="flex flex-col">
+        <SheetHeader className="px-1">
+          <SheetTitle>Filters</SheetTitle>
+        </SheetHeader>
+        <Separator />
+        <div className="flex flex-1 flex-col gap-5 overflow-hidden px-1">
+          {/* <div className="space-y-4">
             <h3 className="text-sm font-medium tracking-wide text-foreground">
               Price range ($)
             </h3>
@@ -70,10 +77,12 @@ function FilterSheet({ collections }: Props) {
               />
             </div>
           </div> */}
-                    {collections?.length ? (
-                        <div className="space-y-4">
-                            <h3 className="text-sm font-medium tracking-wide text-foreground">Categories</h3>
-                            {/* <MultiSelect
+          {collections?.length ? (
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium tracking-wide text-foreground">
+                Categories
+              </h3>
+              {/* <MultiSelect
                 placeholder="Select categories"
                 selected={selectedCategories}
                 setSelected={setSelectedCategories}
@@ -82,22 +91,24 @@ function FilterSheet({ collections }: Props) {
                   value: c,
                 }))}
               /> */}
-                        </div>
-                    ) : null}
-                    {collections ? (
-                        <div className="space-y-4">
-                            <h3 className="text-sm font-medium tracking-wide text-foreground">Subcategories</h3>
-                            {/* <MultiSelect
+            </div>
+          ) : null}
+          {collections ? (
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium tracking-wide text-foreground">
+                Subcategories
+              </h3>
+              {/* <MultiSelect
                 placeholder="Select subcategories"
                 selected={selectedSubcategories}
                 setSelected={setSelectedSubcategories}
                 options={subcategories}
               /> */}
-                        </div>
-                    ) : null}
-                    {false ? (
-                        <div className="space-y-3">
-                            {/* <div className="flex gap-2">
+            </div>
+          ) : null}
+          {false ? (
+            <div className="space-y-3">
+              {/* <div className="flex gap-2">
                 <h3 className="flex-1 text-sm font-medium tracking-wide text-foreground">
                   Stores
                 </h3>
@@ -143,7 +154,7 @@ function FilterSheet({ collections }: Props) {
                   </Button>
                 </div>
               </div> */}
-                            {/* <ScrollArea className="h-96">
+              {/* <ScrollArea className="h-96">
                 <div className="space-y-4">
                   {stores.map((store) => (
                     <div key={store.id} className="flex items-center space-x-2">
@@ -170,13 +181,13 @@ function FilterSheet({ collections }: Props) {
                   ))}
                 </div>
               </ScrollArea> */}
-                        </div>
-                    ) : null}
-                </div>
-                <div>
-                    <Separator className="my-4" />
-                    <SheetFooter>
-                        {/* <Button
+            </div>
+          ) : null}
+        </div>
+        <div>
+          <Separator className="my-4" />
+          <SheetFooter>
+            {/* <Button
               aria-label="Clear Filters"
               variant="secondary"
               size="sm"
@@ -202,11 +213,11 @@ function FilterSheet({ collections }: Props) {
             >
               Clear Filters
             </Button> */}
-                    </SheetFooter>
-                </div>
-            </SheetContent>
-        </Sheet>
-    );
+          </SheetFooter>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
 }
 
 export default FilterSheet;

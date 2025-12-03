@@ -3,24 +3,27 @@ import { Shell } from "@/components/layouts/Shell";
 import { Skeleton } from "@/components/ui/skeleton";
 import { listCollectionsAction } from "@/features/collections";
 import { SearchProductsGridSkeleton } from "@/features/products";
-import { FilterSelections, SearchProductsInifiteScroll } from "@/features/search";
+import {
+  FilterSelections,
+  SearchProductsInifiteScroll,
+} from "@/features/search";
 import { Suspense } from "react";
 
 interface ProductsPageProps {
-    searchParams: {
-        [key: string]: string | string[] | undefined;
-    };
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
 }
 
 async function ProductsPage({}: ProductsPageProps) {
-    // TODO: PROBLEM in server actrion
-    // const collectionsData = await listCollectionsAction();
+  // TODO: PROBLEM in server actrion
+  // const collectionsData = await listCollectionsAction();
 
-    return (
-        <Shell>
-            <Header heading="Shop Now" />
+  return (
+    <Shell>
+      <Header heading="Shop Now" />
 
-            {/* <Suspense
+      {/* <Suspense
         fallback={
           <div>
             <Skeleton className="max-w-xl h-8 mb-3" />
@@ -32,11 +35,11 @@ async function ProductsPage({}: ProductsPageProps) {
       </Suspense>
        */}
 
-            <Suspense fallback={<SearchProductsGridSkeleton />}>
-                <SearchProductsInifiteScroll />
-            </Suspense>
-        </Shell>
-    );
+      <Suspense fallback={<SearchProductsGridSkeleton />}>
+        <SearchProductsInifiteScroll />
+      </Suspense>
+    </Shell>
+  );
 }
 
 export default ProductsPage;

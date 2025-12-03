@@ -5,13 +5,16 @@ import { Suspense } from "react";
 type Props = {};
 
 async function MediasPage({}: Props) {
-    return (
-        <AdminShell heading="Medias" description="You can add/edit the medias from the dashboard">
-            <Suspense fallback={<ImageGridSkeleton />}>
-                <MediasPageContent />
-            </Suspense>
-        </AdminShell>
-    );
+  return (
+    <AdminShell
+      heading="Medias"
+      description="You can add/edit the medias from the dashboard"
+    >
+      <Suspense fallback={<ImageGridSkeleton />}>
+        <MediasPageContent />
+      </Suspense>
+    </AdminShell>
+  );
 }
 
 export default MediasPage;
